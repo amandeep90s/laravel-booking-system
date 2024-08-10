@@ -23,7 +23,8 @@ return new class extends Migration
             $table->integer('numberOfVisitors');
             $table->string('purposeSubject');
             $table->text('purposeDescription')->nullable();
-            $table->dateTime('visitDate');
+            $table->date('visitDate');
+            $table->time('visitTime');
             $table->text('guestsList')->nullable();
             $table->softDeletes();
             $table->timestamps();
