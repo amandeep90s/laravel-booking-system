@@ -50,6 +50,37 @@ export default function HomeLayout({ children }) {
         };
     }, []);
 
+    useEffect(() => {
+        const cssFiles = [
+            '/css/swiper-bundle.min.css',
+            '/css/aos.css',
+            '/css/output.css',
+            '/css/style.css',
+        ];
+
+        // Function to dynamically load CSS files
+        const loadCSSFiles = () => {
+            cssFiles.forEach((href) => {
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = href;
+                document.head.appendChild(link);
+            });
+        };
+
+        loadCSSFiles();
+
+        // Cleanup on component unmount
+        return () => {
+            cssFiles.forEach((href) => {
+                const link = document.querySelector(`link[href="${href}"]`);
+                if (link) {
+                    document.head.removeChild(link);
+                }
+            });
+        };
+    }, []);
+
     return (
         <>
             <Menu />
