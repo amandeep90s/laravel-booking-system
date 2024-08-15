@@ -20,11 +20,13 @@ export default function HomeLayout({ children }) {
 
         // Function to dynamically load scripts
         const loadScripts = async () => {
+            const loadedScripts = [];
             for (const src of scripts) {
                 const script = document.createElement("script");
                 script.src = src;
                 script.async = true;
                 document.body.appendChild(script);
+                loadedScripts.push(script);
 
                 // Wait for each script to load
                 await new Promise((resolve) => {
@@ -36,17 +38,17 @@ export default function HomeLayout({ children }) {
             if (window.AOS) {
                 window.AOS.init();
             }
+
+            return loadedScripts;
         };
 
-        loadScripts();
+        let loadedScripts = [];
+        loadScripts().then(scripts => loadedScripts = scripts);
 
         // Cleanup on component unmount
         return () => {
-            scripts.forEach((src) => {
-                const script = document.querySelector(`script[src="${src}"]`);
-                if (script) {
-                    document.body.removeChild(script);
-                }
+            loadedScripts.forEach((script) => {
+                document.body.removeChild(script);
             });
         };
     }, []);
@@ -61,23 +63,23 @@ export default function HomeLayout({ children }) {
 
         // Function to dynamically load CSS files
         const loadCSSFiles = () => {
+            const loadedLinks = [];
             cssFiles.forEach((href) => {
                 const link = document.createElement("link");
                 link.rel = "stylesheet";
                 link.href = href;
                 document.head.appendChild(link);
+                loadedLinks.push(link);
             });
+            return loadedLinks;
         };
 
-        loadCSSFiles();
+        const loadedLinks = loadCSSFiles();
 
         // Cleanup on component unmount
         return () => {
-            cssFiles.forEach((href) => {
-                const link = document.querySelector(`link[href="${href}"]`);
-                if (link) {
-                    document.head.removeChild(link);
-                }
+            loadedLinks.forEach((link) => {
+                document.head.removeChild(link);
             });
         };
     }, []);
