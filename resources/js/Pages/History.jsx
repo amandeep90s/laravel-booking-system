@@ -1,10 +1,15 @@
 import React from 'react';
+import { Head } from '@inertiajs/react';
+import HomeLayout from '@/Layouts/HomeLayout.jsx';
 
 const History = () => {
   return (
-    <div>
-      <h1>History</h1>
-    </div>
+    <HomeLayout>
+      <Head title="History" />
+      <div>
+        <h1>Coming Soon</h1>
+      </div>
+    </HomeLayout>
   );
 };
 

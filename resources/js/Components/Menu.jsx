@@ -157,26 +157,26 @@ const Menu = () => {
                 <ul className="flex items-center space-x-10">
                   <li className="group z-50">
                     <Link
-                      href
+                      href={route('home')}
                       className="text-paragraph hover:text-purple flex items-center gap-2 font-semibold hover:underline"
                     >
                       Home
                     </Link>
                   </li>
                   <li className="text-paragraph hover:text-purple font-semibold hover:underline">
-                    <Link href="/about-us">About Us</Link>
+                    <Link href={route('about-us')}>About Us</Link>
                   </li>
                   <li className="text-paragraph hover:text-purple font-semibold hover:underline">
-                    <Link href="/history">History</Link>
+                    <Link href={route('history')}>History</Link>
                   </li>
                   <li className="text-paragraph hover:text-purple font-semibold hover:underline">
-                    <Link href="/press-media">Press/Media</Link>
+                    <Link href={route('press-media')}>Press/Media</Link>
                   </li>
                   <li className="text-paragraph hover:text-purple font-semibold hover:underline">
-                    <Link href="/appointment">Appointment</Link>
+                    <Link href={route('appointment')}>Appointment</Link>
                   </li>
                   <li className="text-paragraph hover:text-purple font-semibold hover:underline">
-                    <Link href="/contact-us">Contact Us</Link>
+                    <Link href={route('contact-us')}>Contact Us</Link>
                   </li>
                 </ul>
               </div>

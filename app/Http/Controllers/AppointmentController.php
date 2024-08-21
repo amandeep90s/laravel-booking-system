@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
 use App\Models\Appointment;
+use Inertia\Inertia;
 
 class AppointmentController extends Controller
 {
@@ -13,7 +14,7 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Appointment');
     }
 
     /**

@@ -1,18 +1,22 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PressMediaController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Home', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('about-us', [AboutUsController::class, 'index'])->name('about-us');
+Route::get('contact-us', [ContactUsController::class, 'index'])->name('contact-us');
+Route::get('history', [HistoryController::class, 'index'])->name('history');
+Route::get('press-media', [PressMediaController::class, 'index'])->name('press-media');
+Route::get('appointment', [AppointmentController::class, 'index'])->name('appointment');
+Route::post('appointment', [AppointmentController::class, 'store'])->name('appointment-store');
 
 Route::get('dashboard', function () {
     return Inertia::render('Dashboard');
