@@ -1,7 +1,7 @@
 import HomeLayout from '@/Layouts/HomeLayout';
 import { Head, Link } from '@inertiajs/react';
 
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
+export default function Home({ auth, laravelVersion, phpVersion }) {
   return (
     <HomeLayout>
       <Head title="Home" />
