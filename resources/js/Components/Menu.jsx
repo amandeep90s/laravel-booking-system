@@ -149,7 +149,7 @@ const Menu = () => {
           <div className="relative flex h-[95px] w-full items-center justify-between border border-t-0 border-[#e7e8e9] bg-white px-[50px]">
             <div className="flex w-full items-center justify-between xl:w-auto xl:space-x-10 2xl:space-x-[100px]">
               <div>
-                <Link href="index-1.html" aria-label="logo">
+                <Link href="/" aria-label="logo">
                   <img src="/images/logo-1.webp" alt="" />
                 </Link>
               </div>
@@ -157,201 +157,35 @@ const Menu = () => {
                 <ul className="flex items-center space-x-10">
                   <li className="group z-50">
                     <Link
-                      href
+                      href={route('home')}
                       className="text-paragraph hover:text-purple flex items-center gap-2 font-semibold hover:underline"
                     >
                       Home
                     </Link>
                   </li>
                   <li className="text-paragraph hover:text-purple font-semibold hover:underline">
-                    <Link href="about.html">Company</Link>
+                    <Link href={route('about-us')}>About Us</Link>
                   </li>
                   <li className="text-paragraph hover:text-purple font-semibold hover:underline">
-                    <Link href="service.html">Services</Link>
+                    <Link href={route('history')}>History</Link>
                   </li>
                   <li className="text-paragraph hover:text-purple font-semibold hover:underline">
-                    <Link href="blog.html">Blogs</Link>
-                  </li>
-                  <li className="group relative">
-                    <Link
-                      className="text-paragraph hover:text-purple flex items-center gap-2 font-semibold hover:underline"
-                      href="#"
-                    >
-                      Pages
-                      <svg
-                        className="transition-all duration-300 group-hover:rotate-180"
-                        width={10}
-                        height={10}
-                        viewBox="0 0 19 10"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M2 2L9.5 8L17 2"
-                          stroke="currentColor"
-                          strokeWidth={3}
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </Link>
-                    <div className="absolute -left-7 top-5 h-0 overflow-hidden px-2 transition-all duration-700 group-hover:h-[480px]">
-                      <ul className="top-20 mt-8 max-h-fit min-w-[200px] overflow-hidden rounded-b-md bg-white px-5 pb-4 transition-all duration-300">
-                        <li className="relative py-1">
-                          <Link
-                            className="home-two-nav-item hover:text-purple text-paragraph font-inter relative w-fit font-medium leading-5"
-                            href="projects.html"
-                          >
-                            Projects
-                          </Link>
-                        </li>
-                        <li className="relative py-1">
-                          <Link
-                            className="home-two-nav-item hover:text-purple text-paragraph font-inter relative w-fit font-medium leading-5"
-                            href="project-details.html"
-                          >
-                            Project Details
-                          </Link>
-                        </li>
-                        <li className="relative py-1">
-                          <Link
-                            className="home-two-nav-item hover:text-purple text-paragraph font-inter relative w-fit font-medium leading-5"
-                            href="service-details.html"
-                          >
-                            Service Details
-                          </Link>
-                        </li>
-                        <li className="relative py-1">
-                          <Link
-                            className="home-two-nav-item hover:text-purple text-paragraph font-inter relative w-fit font-medium leading-5"
-                            href="blog-details.html"
-                          >
-                            Blog Details
-                          </Link>
-                        </li>
-                        <li className="relative py-1">
-                          <Link
-                            className="home-two-nav-item hover:text-purple text-paragraph font-inter relative w-fit font-medium leading-5"
-                            href="pricing.html"
-                          >
-                            Pricing
-                          </Link>
-                        </li>
-                        <li className="relative py-1">
-                          <Link
-                            className="home-two-nav-item hover:text-purple text-paragraph font-inter relative w-fit font-medium leading-5"
-                            href="team-members.html"
-                          >
-                            Team Members
-                          </Link>
-                        </li>
-                        <li className="relative py-1">
-                          <Link
-                            className="home-two-nav-item hover:text-purple text-paragraph font-inter relative w-fit font-medium leading-5"
-                            href="faq.html"
-                          >
-                            FAQ'S
-                          </Link>
-                        </li>
-                        <li className="relative py-1">
-                          <Link
-                            className="home-two-nav-item hover:text-purple text-paragraph font-inter relative w-fit font-medium leading-5"
-                            href="course-details.html"
-                          >
-                            Course Details
-                          </Link>
-                        </li>
-                        <li className="relative py-1">
-                          <Link
-                            className="home-two-nav-item hover:text-purple text-paragraph font-inter relative w-fit font-medium leading-5"
-                            href="cart.html"
-                          >
-                            Cart
-                          </Link>
-                        </li>
-                        <li className="relative py-1">
-                          <Link
-                            className="home-two-nav-item hover:text-purple text-paragraph font-inter relative w-fit font-medium leading-5"
-                            href="checkout.html"
-                          >
-                            Checkout
-                          </Link>
-                        </li>
-                        <li className="relative py-1">
-                          <Link
-                            className="home-two-nav-item hover:text-purple text-paragraph font-inter relative w-fit font-medium leading-5"
-                            href="404.html"
-                          >
-                            Not Found
-                          </Link>
-                        </li>
-                      </ul>
-                    </div>
+                    <Link href={route('press-media')}>Press/Media</Link>
                   </li>
                   <li className="text-paragraph hover:text-purple font-semibold hover:underline">
-                    <Link href="contact.html">Contact</Link>
+                    <Link href={route('appointment')}>Appointment</Link>
                   </li>
-                  <li className="flex items-center">
-                    <input
-                      id="hh-search"
-                      type="text"
-                      className="border-purple/10 w-0 rounded-md border-0 px-0 transition-all duration-300 focus:mr-2 focus:w-48 focus:border focus:px-2 focus:outline-none"
-                      placeholder="Search..."
-                    />
-                    <label className="cursor-pointer" htmlFor="hh-search" type="button">
-                      <svg
-                        className="cursor-pointer"
-                        width={17}
-                        height={17}
-                        viewBox="0 0 17 17"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M13.9729 7.46687C13.9729 10.922 11.172 13.7229 7.71687 13.7229C4.26176 13.7229 1.46084 10.922 1.46084 7.46687C1.46084 4.01176 4.26176 1.21084 7.71687 1.21084C11.172 1.21084 13.9729 4.01176 13.9729 7.46687ZM7.71687 14.9337C11.8407 14.9337 15.1837 11.5907 15.1837 7.46687C15.1837 3.34303 11.8407 0 7.71687 0C3.59303 0 0.25 3.34303 0.25 7.46687C0.25 11.5907 3.59303 14.9337 7.71687 14.9337ZM16.5333 16.2832C15.9108 16.9056 14.9016 16.9056 14.2791 16.2832L12.7673 14.7713C13.6473 14.1617 14.4118 13.3972 15.0214 12.5172L16.5333 14.029C17.1557 14.6515 17.1557 15.6607 16.5333 16.2832Z"
-                          fill="#6D6D6D"
-                        />
-                      </svg>
-                    </label>
+                  <li className="text-paragraph hover:text-purple font-semibold hover:underline">
+                    <Link href={route('contact-us')}>Contact Us</Link>
                   </li>
                 </ul>
               </div>
             </div>
             <div className="hidden items-center space-x-[30px] xl:flex">
-              <Link href="#">
-                <div className="flex items-center space-x-1.5">
-                  <span className="font-semibold">Sign Up</span>
-                  <span>
-                    <svg width={14} height={18} viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M8.84289 11.625H8.84961M5.09961 11.625H5.10633"
-                        stroke="#101828"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M1.17547 14.1336C1.34413 15.3862 2.38171 16.3676 3.64435 16.4257C4.70682 16.4745 5.78609 16.5 6.97461 16.5C8.16313 16.5 9.24241 16.4745 10.3049 16.4257C11.5675 16.3676 12.6051 15.3862 12.7738 14.1336C12.8838 13.316 12.9746 12.4782 12.9746 11.625C12.9746 10.7718 12.8838 9.93399 12.7738 9.11644C12.6051 7.86377 11.5675 6.88237 10.3049 6.82432C9.24241 6.77548 8.16313 6.75 6.97461 6.75C5.78609 6.75 4.70681 6.77548 3.64435 6.82432C2.38171 6.88237 1.34413 7.86377 1.17547 9.11644C1.06539 9.93399 0.974609 10.7718 0.974609 11.625C0.974609 12.4782 1.06539 13.316 1.17547 14.1336Z"
-                        stroke="#101828"
-                        strokeWidth="1.5"
-                      />
-                      <path
-                        d="M3.59961 6.75V4.875C3.59961 3.01104 5.11065 1.5 6.97461 1.5C8.83857 1.5 10.3496 3.01104 10.3496 4.875V6.75"
-                        stroke="#101828"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                </div>
-              </Link>
-              <Link href="blog.html">
+              <Link href="/">
                 <div className="home-two-btn-bg bg-blue-seo border-blue-seo group py-3">
                   <span className="group-hover:text-blue-seo font-inter relative z-10 text-base font-semibold text-white transition-all duration-300">
-                    Learn More
+                    Call Us
                   </span>
                   <svg
                     className="relative z-10"
