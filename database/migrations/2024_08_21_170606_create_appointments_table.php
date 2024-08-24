@@ -10,6 +10,21 @@ return new class extends Migration
     {
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 100);
+            $table->string('aadhaarNumber', 20);
+            $table->string('mobileNumber', 20);
+            $table->string('addressLine1');
+            $table->string('addressLine2')->nullable();
+            $table->string('state', 100);
+            $table->string('district', 100);
+            $table->string('block', 100)->nullable();
+            $table->integer('numberOfVisitors');
+            $table->string('visitPurpose');
+            $table->text('visitDescription')->nullable();
+            $table->date('visitDate');
+            $table->time('visitTime');
+            $table->text('guestsList')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
