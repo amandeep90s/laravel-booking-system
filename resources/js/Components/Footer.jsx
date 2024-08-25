@@ -1,11 +1,12 @@
-import React from 'react';
 import { Link } from '@inertiajs/react';
+import { Heart } from 'lucide-react';
+import React from 'react';
 
 const Footer = () => {
   return (
     <footer>
       <div className="footer-one-wrapper w-full pt-[130px]">
-        <div className="theme-container mx-auto">
+        <div className="theme-container mx-auto hidden">
           <div className="w-full">
             <div className="top-bar mb-10 flex w-full flex-col items-center space-y-10 md:mb-[80px] md:flex-row md:justify-between md:space-y-0">
               <div>
@@ -166,7 +167,8 @@ const Footer = () => {
           <div className="theme-container mx-auto h-full">
             <div className="flex h-full w-full items-center justify-between text-xs md:text-base">
               <span className="text-white">
-                2024 © All rights reserved by <strong>Quland</strong>
+                {new Date().toLocaleDateString().split('/')[2]} © All rights reserved by{' '}
+                <strong>MP Bhai Amritpal Singh</strong>
               </span>
               <div className="relative hidden md:block">
                 <a
@@ -189,13 +191,15 @@ const Footer = () => {
                 </a>
               </div>
               <ul className="hidden items-center md:flex md:space-x-6">
-                <li className="hover:text-purple common-transition text-paragraph font-medium hover:underline">
-                  <Link href="/">Privacy Policy</Link>
+                <li className="hover:text-purple common-transition text-paragraph flex items-center gap-1 font-medium">
+                  <a href="https://hexser.com" target="_blank">
+                    Made with <Heart className="inline text-red-600" size={20} fill="red" /> by Hexer Team
+                  </a>
                 </li>
-                <li className="text-paragraph font-medium">|</li>
+                {/* <li className="text-paragraph font-medium">|</li>
                 <li className="hover:text-purple common-transition text-paragraph font-medium hover:underline">
                   <Link href="/">Terms &amp; Conditions</Link>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
