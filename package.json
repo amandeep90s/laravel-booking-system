@@ -26,6 +26,7 @@
     "vite": "^5.0"
   },
   "dependencies": {
-    "@headlessui/react": "^2.1.2"
+    "@headlessui/react": "^2.1.2",
+    "@react-input/mask": "^1.2.5"
   }
 }
