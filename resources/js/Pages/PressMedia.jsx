@@ -8,7 +8,7 @@ const PressMedia = () => {
     <HomeLayout>
       <Head title="Press Media" />
       <Callout title="Press / Media" link={route('press-media')} />
-      <div className="py-5 text-center">
+      <div className="pt-[130px] text-center">
         <h1 className="text-main-black text-34 sm:text-48 w-full text-center font-semibold">Under Development</h1>
       </div>
     </HomeLayout>

@@ -8,7 +8,7 @@ const History = () => {
     <HomeLayout>
       <Head title="History" />
       <Callout title="History" link={route('history')} />
-      <div className="py-5 text-center">
+      <div className="pt-[130px] text-center">
         <h1 className="text-main-black text-34 sm:text-48 w-full text-center font-semibold">Under Development</h1>
       </div>
     </HomeLayout>

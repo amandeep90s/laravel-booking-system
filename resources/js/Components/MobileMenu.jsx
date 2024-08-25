@@ -6,7 +6,7 @@ const MobileMenu = () => {
     <header className="relative flex flex-col xl:hidden">
       <div className="fixed left-0 top-0 z-50 flex h-16 w-full items-center justify-between bg-white px-2.5">
         <Link href="/" aria-label="logo">
-          <img src="/images/home-two/logo.svg" alt="logo" />
+          <h1 className="text-2xl font-semibold text-gray-700">MP. Bhai Amritpal Singh</h1>
         </Link>
         <button
           aria-label="mobile-Menu"
@@ -40,100 +40,28 @@ const MobileMenu = () => {
         >
           <div className="flex flex-col gap-28 pl-5 pt-5">
             <ul className="text-paragraph font-inter flex flex-col gap-5 text-base font-medium leading-5">
-              <li className="group">
-                <Link className="home-two-nav-item relative w-fit leading-5 before:content-['Home']">Home</Link>
-              </li>
-              <li className="home-two-nav-item relative w-fit before:content-['Company']">
-                <Link href="about.html">Company</Link>
-              </li>
-              <li className="home-two-nav-item relative w-fit before:content-['Services']">
-                <Link href="service.html">Services</Link>
-              </li>
-              <li className="home-two-nav-item relative w-fit before:content-['Blogs']">
-                <Link href="blog.html">Blogs</Link>
-              </li>
-              <li>
-                <Link href="#" className="home-two-nav-item m-nav-dropdown relative w-fit before:content-['Pages']">
-                  Pages
+              <li className="text-paragraph hover:text-purple font-semibold hover:underline">
+                <Link
+                  href={route('home')}
+                  className="text-paragraph hover:text-purple flex items-center gap-2 font-semibold hover:underline"
+                >
+                  Home
                 </Link>
-                <ul className="mobile-sub-nav h-[150px] overflow-hidden pl-5 pt-4 transition-all duration-300">
-                  <li className="relative pb-1">
-                    <Link
-                      className="home-two-nav-item hover:text-purple relative w-fit py-1 leading-5"
-                      href="projects.html"
-                    >
-                      Projects
-                    </Link>
-                  </li>
-                  <li className="relative py-1">
-                    <Link
-                      className="home-two-nav-item hover:text-purple relative w-fit py-1 leading-5"
-                      href="project-details.html"
-                    >
-                      Projects Details
-                    </Link>
-                  </li>
-                  <li className="relative py-1">
-                    <Link
-                      className="home-two-nav-item hover:text-purple relative w-fit py-1 leading-5"
-                      href="service-details.html"
-                    >
-                      Service Details
-                    </Link>
-                  </li>
-                  <li className="relative py-1">
-                    <Link
-                      className="home-two-nav-item hover:text-purple relative w-fit leading-5"
-                      href="blog-details.html"
-                    >
-                      Blog Details
-                    </Link>
-                  </li>
-                  <li className="relative py-1">
-                    <Link
-                      className="home-two-nav-item hover:text-purple relative w-fit leading-5"
-                      href="team-members.html"
-                    >
-                      Team Members
-                    </Link>
-                  </li>
-                  <li className="relative py-1">
-                    <Link className="home-two-nav-item hover:text-purple relative w-fit leading-5" href="faq.html">
-                      FAQ's
-                    </Link>
-                  </li>
-                  <li className="relative py-1">
-                    <Link className="home-two-nav-item hover:text-purple relative w-fit leading-5" href="pricing.html">
-                      Pricing
-                    </Link>
-                  </li>
-                  <li className="relative py-1">
-                    <Link
-                      className="home-two-nav-item hover:text-purple relative w-fit leading-5"
-                      href="course-details.html"
-                    >
-                      Course Details
-                    </Link>
-                  </li>
-                  <li className="relative py-1">
-                    <Link className="home-two-nav-item hover:text-purple relative w-fit leading-5" href="cart.html">
-                      Cart
-                    </Link>
-                  </li>
-                  <li className="relative py-1">
-                    <Link className="home-two-nav-item hover:text-purple relative w-fit leading-5" href="checkout.html">
-                      Checkout
-                    </Link>
-                  </li>
-                  <li className="relative py-1">
-                    <Link className="home-two-nav-item hover:text-purple relative w-fit leading-5" href="404.html">
-                      Not Found
-                    </Link>
-                  </li>
-                </ul>
               </li>
-              <li className="home-two-nav-item relative w-fit before:content-['Contact']">
-                <Link href="contact.html">Contact</Link>
+              <li className="text-paragraph hover:text-purple font-semibold hover:underline">
+                <Link href={route('about-us')}>About Us</Link>
+              </li>
+              <li className="text-paragraph hover:text-purple font-semibold hover:underline">
+                <Link href={route('history')}>History</Link>
+              </li>
+              <li className="text-paragraph hover:text-purple font-semibold hover:underline">
+                <Link href={route('press-media')}>Press/Media</Link>
+              </li>
+              <li className="text-paragraph hover:text-purple font-semibold hover:underline">
+                <Link href={route('appointment')}>Appointment</Link>
+              </li>
+              <li className="text-paragraph hover:text-purple font-semibold hover:underline">
+                <Link href={route('contact-us')}>Contact Us</Link>
               </li>
             </ul>
           </div>
@@ -158,7 +86,7 @@ const MobileMenu = () => {
                 Call : 000 (123) 456 88
               </span>
             </Link>
-            <Link href="contact.html">
+            <Link href={route('contact-us')}>
               <div className="home-two-btn-bg bg-blue-seo border-blue-seo group w-fit py-2.5">
                 <span className="group-hover:text-blue-seo font-inter relative z-10 text-base font-semibold text-white transition-all duration-300">
                   Contact US

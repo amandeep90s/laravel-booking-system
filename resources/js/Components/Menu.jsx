@@ -9,7 +9,7 @@ const Menu = () => {
           <div className="h1-top-bar hidden h-[45px] w-full items-center justify-between border border-[#e7e8e9] bg-white pl-[50px]">
             <span className="hidden 2xl:block">
               Welcome to
-              <span className="text-purple font-semibold">Quland</span> a modern landing page website
+              <span className="text-purple font-semibold"> MP. Bhai Amritpal Singh </span> official website
             </span>
             <div
               style={{
@@ -17,7 +17,7 @@ const Menu = () => {
               }}
               className="flex h-full w-full items-center justify-end 2xl:w-[1021px]"
             >
-              <div className="mr-7 flex items-center space-x-2.5">
+              <div className="mr-7 flex hidden items-center space-x-2.5">
                 <span>
                   <svg width={22} height={20} viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -107,42 +107,6 @@ const Menu = () => {
                     </svg>
                   </Link>
                 </li>
-                <li>
-                  <Link href="#" aria-label="instagram" className="text-white opacity-50 hover:opacity-100">
-                    <svg
-                      className="fill-current"
-                      width={16}
-                      height={16}
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M6.33301 1.3335C3.57159 1.3335 1.33301 3.57207 1.33301 6.33349V9.66683C1.33301 12.4283 3.57158 14.6668 6.333 14.6668H9.66634C12.4278 14.6668 14.6663 12.4283 14.6663 9.66683V6.3335C14.6663 3.57207 12.4278 1.3335 9.66634 1.3335H6.33301ZM11.9997 4.66683C12.3679 4.66683 12.6663 4.36835 12.6663 4.00016C12.6663 3.63197 12.3679 3.3335 11.9997 3.3335C11.6315 3.3335 11.333 3.63197 11.333 4.00016C11.333 4.36835 11.6315 4.66683 11.9997 4.66683ZM11.333 8.00016C11.333 9.84111 9.84062 11.3335 7.99967 11.3335C6.15873 11.3335 4.66634 9.84111 4.66634 8.00016C4.66634 6.15921 6.15873 4.66683 7.99967 4.66683C9.84062 4.66683 11.333 6.15921 11.333 8.00016ZM7.99968 10.0002C9.10425 10.0002 9.99968 9.10473 9.99968 8.00016C9.99968 6.89559 9.10425 6.00016 7.99968 6.00016C6.89511 6.00016 5.99968 6.89559 5.99968 8.00016C5.99968 9.10473 6.89511 10.0002 7.99968 10.0002Z"
-                      />
-                    </svg>
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" aria-label="dribble" className="text-white opacity-50 hover:opacity-100">
-                    <svg
-                      className="fill-current"
-                      width={16}
-                      height={16}
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M1.39835 8.93393C1.72537 11.2671 3.26008 13.213 5.35023 14.1194C5.44171 12.239 5.83 10.4322 6.47139 8.73968C5.78768 8.60911 5.07968 8.54051 4.35424 8.54051C3.32743 8.54051 2.33568 8.67795 1.39835 8.93393ZM6.33747 14.4578C6.86896 14.5943 7.42608 14.6668 8.00014 14.6668C9.91365 14.6668 11.6389 13.8607 12.8547 12.5694C11.5276 10.8837 9.64293 9.60383 7.45264 8.97387C6.78607 10.6931 6.3976 12.5372 6.33747 14.4578ZM13.4973 11.7729C14.235 10.7001 14.6668 9.40055 14.6668 8.00016C14.6668 7.88284 14.6638 7.76623 14.6578 7.65041C13.948 7.77894 13.2155 7.84617 12.4668 7.84617C11.0007 7.84617 9.59723 7.58844 8.305 7.11771C8.1422 7.42243 7.98857 7.73218 7.84446 8.04667C10.1079 8.72233 12.0726 10.0381 13.4973 11.7729ZM14.5314 6.6569C14.1849 4.96311 13.1961 3.50327 11.8305 2.54302C10.6581 3.63978 9.64049 4.88118 8.81019 6.23601C9.94876 6.63046 11.1803 6.84617 12.4668 6.84617C13.1737 6.84617 13.8641 6.78102 14.5314 6.6569ZM10.9363 2.01321C10.0504 1.57794 9.05381 1.3335 8.00014 1.3335C6.45644 1.3335 5.03529 1.85817 3.90528 2.73893C4.9255 4.06164 6.28638 5.14045 7.86883 5.85997C8.71336 4.45258 9.7469 3.1601 10.9363 2.01321ZM3.1626 3.41292C2.04672 4.5893 1.35538 6.17236 1.33398 7.91672C2.29735 7.67129 3.31 7.54051 4.35424 7.54051C5.21416 7.54051 6.05258 7.62919 6.85965 7.79752C7.02036 7.43714 7.19278 7.08257 7.37645 6.73426C5.706 5.95997 4.2611 4.81593 3.1626 3.41292Z"
-                      />
-                    </svg>
-                  </Link>
-                </li>
               </ul>
             </div>
           </div>
@@ -150,7 +114,7 @@ const Menu = () => {
             <div className="flex w-full items-center justify-between xl:w-auto xl:space-x-10 2xl:space-x-[100px]">
               <div>
                 <Link href="/" aria-label="logo">
-                  <img src="/images/logo-1.webp" alt="" />
+                  <h1 className="text-2xl font-semibold text-gray-700">MP. Bhai Amritpal Singh</h1>
                 </Link>
               </div>
               <div>
@@ -182,10 +146,10 @@ const Menu = () => {
               </div>
             </div>
             <div className="hidden items-center space-x-[30px] xl:flex">
-              <Link href="/">
+              <Link href={route('contact-us')}>
                 <div className="home-two-btn-bg bg-blue-seo border-blue-seo group py-3">
                   <span className="group-hover:text-blue-seo font-inter relative z-10 text-base font-semibold text-white transition-all duration-300">
-                    Call Us
+                    Contact1 Us
                   </span>
                   <svg
                     className="relative z-10"

@@ -8,7 +8,7 @@ const AboutUs = () => {
     <HomeLayout>
       <Head title="About Us" />
       <Callout title="About Us" link={route('about-us')} />
-      <div className="py-5 text-center">
+      <div className="pt-[130px] text-center">
         <h1 className="text-main-black text-34 sm:text-48 w-full text-center font-semibold">Under Development</h1>
       </div>
     </HomeLayout>
