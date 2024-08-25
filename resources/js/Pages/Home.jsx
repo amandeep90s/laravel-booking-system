@@ -132,31 +132,7 @@ export default function Home({ auth, laravelVersion, phpVersion }) {
                 <div className="relative left-0 top-0 h-full w-full lg:w-[600px] xl:absolute 2xl:w-[752px]">
                   <div className="relative bottom-0 left-0 z-10 w-full xl:absolute">
                     <div className="flex w-full justify-center">
-                      <img src="/images/home-one-hero-main.webp" alt="" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-0 left-0 hidden h-full w-full md:block">
-                    <div id="hero-mouse-move-anim" className="pointer-events-auto relative z-10 h-full w-full">
-                      <div data-depth="0.20" className="layer">
-                        <span className="2xl:text-pone lg:text-pone inline-block rounded-full rounded-br-none bg-[#BA4AFF] px-6 py-1.5 text-white xl:px-[30px] xl:py-2.5 xl:text-sm">
-                          SEO &amp; Marketing
-                        </span>
-                      </div>
-                      <div data-depth="0.30" className="layer">
-                        <span className="bg-purple 2xl:text-pone lg:text-pone inline-block rounded-full rounded-bl-none px-6 py-1.5 text-white xl:px-[30px] xl:py-2.5 xl:text-sm">
-                          Website Optimizations
-                        </span>
-                      </div>
-                      <div data-depth="0.40" className="layer h-fit">
-                        <span className="bg-blue-sass 2xl:text-pone lg:text-pone inline-block h-fit rounded-full rounded-br-none px-6 py-1.5 text-white xl:px-[30px] xl:py-2.5 xl:text-sm">
-                          Marketing &amp; Growth
-                        </span>
-                      </div>
-                      <div data-depth="0.50" className="layer h-fit">
-                        <span className="2xl:text-pone lg:text-pone inline-block h-fit rounded-full rounded-bl-none bg-[#FF8C05] px-6 py-1.5 text-white xl:px-[30px] xl:py-2.5 xl:text-sm">
-                          Keywords Research
-                        </span>
-                      </div>
+                      <img src="/images/mp-amritpal-singh.png" alt="" />
                     </div>
                   </div>
                   <div className="absolute bottom-[100px] left-0 hidden w-full md:block">
@@ -175,7 +151,7 @@ export default function Home({ auth, laravelVersion, phpVersion }) {
           </div>
         </div>
       </section>
-      <section id="home-one-client">
+      <section className="hidden" id="home-one-client">
         <div className="overflow-x-hidden px-5 py-10 md:px-10 md:py-[80px] xl:xl:py-[130px] 2xl:px-[152px]">
           <p className="text-paragraph mb-[50px] text-center text-base font-medium">
             We’ve more than 1250+ global clients
@@ -221,7 +197,7 @@ export default function Home({ auth, laravelVersion, phpVersion }) {
           </div>
         </div>
       </section>
-      <section id="home-one-about">
+      <section className="hidden" id="home-one-about">
         <div className="home-one-about-wrapper w-full pb-[60px] xl:pb-[153px]">
           <div className="theme-container mx-auto">
             <div className="relative grid w-full grid-cols-1 gap-10 md:items-center md:gap-[130px] xl:grid-cols-2">
@@ -363,7 +339,7 @@ export default function Home({ auth, laravelVersion, phpVersion }) {
           </div>
         </div>
       </section>
-      <section id="fun-fact">
+      <section className="hidden" id="fun-fact">
         <div className="fun-fact-wrapper w-full pb-[60px] xl:pb-[130px]">
           <div className="theme-container mx-auto">
             <div className="grid grid-cols-1 xl:grid-cols-2 xl:gap-[155px]">
@@ -455,7 +431,7 @@ export default function Home({ auth, laravelVersion, phpVersion }) {
           </div>
         </div>
       </section>
-      <section id="service">
+      <section className="hidden" id="service">
         <div className="service-section-wrapper relative w-full pb-[60px] xl:pb-[130px]">
           <div className="theme-container relative z-10 mx-auto">
             <div className="bg-main-gray w-full rounded-[10px] border border-[#e7e3fa] px-5 py-[60px] md:px-10 xl:px-[80px] xl:py-[130px]">
@@ -667,7 +643,7 @@ export default function Home({ auth, laravelVersion, phpVersion }) {
           </div>
         </div>
       </section>
-      <section id="working-process">
+      <section className="hidden" id="working-process">
         <div className="working-process-section-wrapper w-full pb-[60px] xl:pb-[130px]">
           <div className="theme-container mx-auto">
             <div className="w-full grid-cols-12 xl:grid">
@@ -779,17 +755,17 @@ export default function Home({ auth, laravelVersion, phpVersion }) {
         </div>
       </section>
       <section id="blogs">
-        <div className="blogs-section-wrapper w-full overflow-hidden py-[60px] xl:pb-[100px] xl:pt-[130px]">
+        <div className="blogs-section-wrapper w-full overflow-hidden pt-[60px] xl:pt-[130px]">
           <div className="theme-container mx-auto">
             <div className="w-full">
               <div className="flex flex-col items-center">
-                <span className="section-title-top-tag mb-5">News &amp; Blog</span>
+                {/* <span className="section-title-top-tag mb-5">News &amp; Blog</span> */}
                 <h2 className="md:text-48 text-34 text-main-black mb-[60px] text-center font-semibold">
-                  Read and explore Our latest news
+                  Under Development
                 </h2>
               </div>
             </div>
-            <div className="grid w-full grid-cols-1 gap-[30px] md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid hidden w-full grid-cols-1 gap-[30px] md:grid-cols-2 xl:grid-cols-3">
               <div data-aos="fade-left" className="item group">
                 <div
                   style={{
@@ -905,7 +881,7 @@ export default function Home({ auth, laravelVersion, phpVersion }) {
           </div>
         </div>
       </section>
-      <section data-aos="fade-up" id="consultation">
+      <section className="hidden" data-aos="fade-up" id="consultation">
         <div className="consultation-section-wrapper relative w-full">
           <div className="theme-container relative z-10 mx-auto">
             <div className="bg-main-gray relative w-full rounded-[20px] border border-[#e7e3fa] py-[80px] pl-10 md:flex xl:pl-[110px]">

@@ -3,7 +3,9 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import { appConstants } from '@/constants/application';
 import HomeLayout from '@/Layouts/HomeLayout.jsx';
+import timings from '@/utils/timings';
 import { Head, useForm } from '@inertiajs/react';
 import { useMask } from '@react-input/mask';
 import React, { useState } from 'react';
@@ -223,13 +225,16 @@ const Appointment = ({ status }) => {
                           name="visitPurpose"
                           value={data.visitPurpose}
                           className="mt-1 block w-full rounded-md border-gray-300 p-2 leading-6 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                          onChange={(e) => setData('visitPurpose', e.target.value)}
+                          onChange={(e) => {
+                            setData('visitPurpose', e.target.value);
+                            setData('visitTime', '');
+                          }}
                           required
                         >
                           <option value="">Select</option>
-                          <option value="1">General Meet &amp; Greet</option>
-                          <option value="2">Complaints</option>
-                          <option value="3">Official Meetings/Visit</option>
+                          <option value={appConstants.GENERAL}>General Meet &amp; Greet</option>
+                          <option value={appConstants.COMPLAINTS}>Complaints</option>
+                          <option value={appConstants.OFFICIAL}>Official Meetings/Visit</option>
                         </select>
 
                         <InputError message={errors.visitPurpose} className="mt-2" />
@@ -263,6 +268,9 @@ const Appointment = ({ status }) => {
                           className="mt-1 block w-full"
                           autoComplete="off"
                           onChange={(e) => setData('visitDate', e.target.value)}
+                          onKeyDown={(e) => {
+                            e.preventDefault();
+                          }}
                           min={new Date().toISOString().split('T')[0]}
                           required
                         />
@@ -282,6 +290,12 @@ const Appointment = ({ status }) => {
                           required
                         >
                           <option value="">Select</option>
+                          {data.visitPurpose &&
+                            timings[data.visitPurpose].map((timing, index) => (
+                              <option key={`${index}-${timing.time}`} value={timing.time}>
+                                {timing.time}
+                              </option>
+                            ))}
                         </select>
 
                         <InputError message={errors.visitTime} className="mt-2" />
