@@ -15,30 +15,23 @@ const Appointment = ({ status }) => {
   const mobileInputRef = useMask({ mask: '__________', replacement: { _: /\d/ } });
 
   const { data, setData, post, processing, errors, reset, transform } = useForm({
-    name: '',
-    aadhaarNumber: '',
-    mobileNumber: '',
-    addressLine1: '',
-    addressLine2: '',
-    state: '',
-    district: '',
-    block: '',
-    numberOfVisitors: '',
-    visitPurpose: '',
-    visitDescription: '',
-    visitDate: '',
-    visitTime: '',
+    name: 'John Doe',
+    aadhaarNumber: '1234-5678-9012',
+    mobileNumber: '9876543210',
+    addressLine1: '123 Main St',
+    addressLine2: 'Apt 4B',
+    state: 'California',
+    district: 'Los Angeles',
+    block: 'Block A',
+    numberOfVisitors: '3',
+    visitPurpose: 'general',
+    visitDescription: 'Discussing project details',
+    visitDate: '2024-08-27',
+    visitTime: '08:00 AM',
     guestsList: [],
   });
 
-  transform((data) => ({
-    ...data,
-    guestsList: guestsListData,
-  }));
-
-  const [guestsListData, setGuestsListData] = useState([]);
-
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
 
     post(route('appointment-store'), {
@@ -59,27 +52,26 @@ const Appointment = ({ status }) => {
           'visitTime',
           'guestsList',
         );
-        setData((prevData) => ({
-          ...prevData,
-          guestsList: [],
-        }));
       },
     });
   };
 
   const addGuest = () => {
-    setGuestsListData([
-      ...guestsListData,
-      { id: guestsListData.length + 1, guestName: '', guestMobile: '', guestAadhaar: '' },
+    setData('guestsList', [
+      ...data.guestsList,
+      { id: data.guestsList.length + 1, guestName: '', guestMobile: '', guestAadhaar: '' },
     ]);
   };
 
   const removeGuest = (id) => {
-    setGuestsListData(guestsListData.filter((guest) => guest.id !== id));
+    setData(
+      'guestsList',
+      data.guestsList.filter((guest) => guest.id !== id),
+    );
   };
 
   const handleGuestChange = (id, key, value) => {
-    const updatedGuestsList = guestsListData.map((guest) => {
+    const updatedGuestsList = data.guestsList.map((guest) => {
       if (guest.id === id) {
         return { ...guest, [key]: value };
       }
@@ -87,7 +79,7 @@ const Appointment = ({ status }) => {
       return guest;
     });
 
-    setGuestsListData(updatedGuestsList);
+    setData('guestsList', updatedGuestsList);
   };
 
   return (
@@ -362,7 +354,7 @@ const Appointment = ({ status }) => {
                         </button>
                       </div>
 
-                      {guestsListData.map((guest) => (
+                      {data.guestsList.map((guest) => (
                         <React.Fragment key={guest.id}>
                           <div className="sm:col-span-2 sm:col-start-1">
                             <InputLabel htmlFor={`guestName-${guest.id}`} value={`Name ${guest.id}`} required={true} />
@@ -371,7 +363,7 @@ const Appointment = ({ status }) => {
                               id={`guestName-${guest.id}`}
                               type="text"
                               name={`guestName-${guest.id}`}
-                              value={guest.name}
+                              value={guest.guestName}
                               className="mt-1 block w-full"
                               autoComplete="off"
                               onChange={(e) => handleGuestChange(guest.id, 'guestName', e.target.value)}
@@ -379,7 +371,7 @@ const Appointment = ({ status }) => {
                               required
                             />
 
-                            <InputError message={errors.name} className="mt-2" />
+                            <InputError message={errors.guestName} className="mt-2" />
                           </div>
 
                           <div className="sm:col-span-2">
@@ -393,7 +385,7 @@ const Appointment = ({ status }) => {
                               id={`guestMobile-${guest.id}`}
                               type="text"
                               name={`guestMobile-${guest.id}`}
-                              value={guest.mobile}
+                              value={guest.guestMobile}
                               className="mt-1 block w-full"
                               autoComplete="off"
                               onChange={(e) => handleGuestChange(guest.id, 'guestMobile', e.target.value)}
@@ -402,7 +394,7 @@ const Appointment = ({ status }) => {
                               required
                             />
 
-                            <InputError message={errors.name} className="mt-2" />
+                            <InputError message={errors.guestMobile} className="mt-2" />
                           </div>
 
                           <div className="sm:col-span-2">
@@ -416,7 +408,7 @@ const Appointment = ({ status }) => {
                               id={`guestAadhaar-${guest.id}`}
                               type="text"
                               name={`guestAadhaar-${guest.id}`}
-                              value={guest.aadhaar}
+                              value={guest.guestAadhaar}
                               className="mt-1 block w-full"
                               autoComplete="off"
                               onChange={(e) => handleGuestChange(guest.id, 'guestAadhaar', e.target.value)}
@@ -425,7 +417,7 @@ const Appointment = ({ status }) => {
                               required
                             />
 
-                            <InputError message={errors.name} className="mt-2" />
+                            <InputError message={errors.guestAadhaar} className="mt-2" />
                           </div>
 
                           <div className="sm:col-span-2">

@@ -15,7 +15,7 @@ class AppointmentController extends Controller
     public function index()
     {
         return Inertia::render('Appointment', [
-            'status' => null,
+            'status' => session('status'),
         ]);
     }
 
@@ -32,6 +32,17 @@ class AppointmentController extends Controller
      */
     public function store(StoreAppointmentRequest $request)
     {
+        // Check if an appointment with the same visitDate and visitTime already exists
+        $existingAppointment = Appointment::where('visitDate', $request->visitDate)
+            ->where('visitTime', date('H:i:s', strtotime($request->visitTime)))
+            ->where('visitPurpose', $request->visitPurpose)
+            ->first();
+
+        if ($existingAppointment) {
+            return back()->withErrors(['visitDate' => 'An appointment at this date and time already booked.']);
+        }
+
+        // Create a new appointment
         Appointment::create([
             'name' => $request->name,
             'aadhaarNumber' => $request->aadhaarNumber,
@@ -49,9 +60,9 @@ class AppointmentController extends Controller
             'guestsList' => json_encode($request->guestsList),
         ]);
 
-        return Inertia::render('Appointment', [
-            'status' => 'Your appointment booked successfully!',
-        ]);
+        session()->flash('status', 'Your appointment booked successfully!');
+
+        return to_route('appointment');
     }
 
     /**
