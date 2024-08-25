@@ -8,13 +8,13 @@ import HomeLayout from '@/Layouts/HomeLayout.jsx';
 import timings from '@/utils/timings';
 import { Head, useForm } from '@inertiajs/react';
 import { useMask } from '@react-input/mask';
-import React, { useState } from 'react';
+import React from 'react';
 
 const Appointment = ({ status }) => {
   const aadhaarInputRef = useMask({ mask: '____-____-____', replacement: { _: /\d/ } });
   const mobileInputRef = useMask({ mask: '__________', replacement: { _: /\d/ } });
 
-  const { data, setData, post, processing, errors, reset, transform } = useForm({
+  const { data, setData, post, processing, errors, reset } = useForm({
     name: 'John Doe',
     aadhaarNumber: '1234-5678-9012',
     mobileNumber: '9876543210',
@@ -36,22 +36,22 @@ const Appointment = ({ status }) => {
 
     post(route('appointment-store'), {
       onFinish: () => {
-        reset(
-          'name',
-          'aadhaarNumber',
-          'mobileNumber',
-          'addressLine1',
-          'addressLine2',
-          'state',
-          'district',
-          'block',
-          'numberOfVisitors',
-          'visitPurpose',
-          'visitDescription',
-          'visitDate',
-          'visitTime',
-          'guestsList',
-        );
+        // reset(
+        //   'name',
+        //   'aadhaarNumber',
+        //   'mobileNumber',
+        //   'addressLine1',
+        //   'addressLine2',
+        //   'state',
+        //   'district',
+        //   'block',
+        //   'numberOfVisitors',
+        //   'visitPurpose',
+        //   'visitDescription',
+        //   'visitDate',
+        //   'visitTime',
+        //   'guestsList',
+        // );
       },
     });
   };
@@ -354,7 +354,7 @@ const Appointment = ({ status }) => {
                         </button>
                       </div>
 
-                      {data.guestsList.map((guest) => (
+                      {data.guestsList.map((guest, index) => (
                         <React.Fragment key={guest.id}>
                           <div className="sm:col-span-2 sm:col-start-1">
                             <InputLabel htmlFor={`guestName-${guest.id}`} value={`Name ${guest.id}`} required={true} />
@@ -371,7 +371,7 @@ const Appointment = ({ status }) => {
                               required
                             />
 
-                            <InputError message={errors.guestName} className="mt-2" />
+                            <InputError message={errors[`guestsList.${index}.guestName`]} className="mt-2" />
                           </div>
 
                           <div className="sm:col-span-2">
@@ -394,7 +394,7 @@ const Appointment = ({ status }) => {
                               required
                             />
 
-                            <InputError message={errors.guestMobile} className="mt-2" />
+                            <InputError message={errors[`guestsList.${index}.guestMobile`]} className="mt-2" />
                           </div>
 
                           <div className="sm:col-span-2">
@@ -417,7 +417,7 @@ const Appointment = ({ status }) => {
                               required
                             />
 
-                            <InputError message={errors.guestAadhaar} className="mt-2" />
+                            <InputError message={errors[`guestsList.${index}.guestAadhaar`]} className="mt-2" />
                           </div>
 
                           <div className="sm:col-span-2">
