@@ -6,10 +6,10 @@ const Menu = () => {
     <header>
       <div className="header-wrapper h1-header-sticky h1-header-sticky-qs fixed left-0 top-0 z-20 hidden w-full xl:block">
         <div className="relative mx-auto px-5 2xl:px-[110px]">
-          <div className="h1-top-bar hidden h-[45px] w-full items-center justify-between border border-[#e7e8e9] bg-white pl-[50px]">
+          <div className="h1-top-bar !hidden h-[45px] w-full items-center justify-between border border-[#e7e8e9] bg-white pl-[50px]">
             <span className="hidden 2xl:block">
-              Welcome to
-              <span className="text-purple font-semibold"> MP. Bhai Amritpal Singh </span> official website
+              Welcome to{''}
+              <span className="text-purple font-semibold">MP. Bhai Amritpal Singh </span>official website
             </span>
             <div
               style={{
@@ -17,7 +17,7 @@ const Menu = () => {
               }}
               className="flex h-full w-full items-center justify-end 2xl:w-[1021px]"
             >
-              <div className="mr-7 flex hidden items-center space-x-2.5">
+              <div className="mr-7 hidden items-center space-x-2.5">
                 <span>
                   <svg width={22} height={20} viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
