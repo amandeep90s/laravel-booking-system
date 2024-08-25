@@ -24,18 +24,18 @@ class StoreAppointmentRequest extends FormRequest
         return [
             'name' => 'required|string|max:60',
             'aadhaarNumber' => 'required|string|max:14',
-            'mobileNumber' => 'required|integer|max:12',
+            'mobileNumber' => 'required|string|max:12',
             'addressLine1' => 'required|string|max:255',
             'addressLine2' => 'nullable|string|max:255',
             'state' => 'required|string|max:50',
             'district' => 'required|string|max:50',
             'block' => 'nullable|string|max:50',
             'numberOfVisitors' => 'required|integer|min:1',
-            'visitPurpose' => 'required|string|enum:general,complaints,official',
+            'visitPurpose' => 'required|string',
             'visitDescription' => 'required|string|max:2000',
             'visitDate' => 'required|date',
             'visitTime' => 'required|string',
-            'guestsList' => 'required|array',
+            'guestsList' => 'nullable|array',
         ];
     }
 }

@@ -11,10 +11,10 @@ import { useMask } from '@react-input/mask';
 import React, { useState } from 'react';
 
 const Appointment = ({ status }) => {
-  const aadhaarInputRef = useMask({ mask: '____ ____ ____', replacement: { _: /\d/ } });
-  const mobileInputRef = useMask({ mask: '____________', replacement: { _: /\d/ } });
+  const aadhaarInputRef = useMask({ mask: '____-____-____', replacement: { _: /\d/ } });
+  const mobileInputRef = useMask({ mask: '__________', replacement: { _: /\d/ } });
 
-  const { data, setData, post, processing, errors, reset } = useForm({
+  const { data, setData, post, processing, errors, reset, transform } = useForm({
     name: '',
     aadhaarNumber: '',
     mobileNumber: '',
@@ -31,22 +31,55 @@ const Appointment = ({ status }) => {
     guestsList: [],
   });
 
-  const [guestsList, setGuestsList] = useState([]);
+  transform((data) => ({
+    ...data,
+    guestsList: guestsListData,
+  }));
+
+  const [guestsListData, setGuestsListData] = useState([]);
 
   const submit = (e) => {
     e.preventDefault();
+
+    post(route('appointment-store'), {
+      onFinish: () => {
+        reset(
+          'name',
+          'aadhaarNumber',
+          'mobileNumber',
+          'addressLine1',
+          'addressLine2',
+          'state',
+          'district',
+          'block',
+          'numberOfVisitors',
+          'visitPurpose',
+          'visitDescription',
+          'visitDate',
+          'visitTime',
+          'guestsList',
+        );
+        setData((prevData) => ({
+          ...prevData,
+          guestsList: [],
+        }));
+      },
+    });
   };
 
   const addGuest = () => {
-    setGuestsList([...guestsList, { id: guestsList.length + 1, name: '', mobile: '', aadhaar: '' }]);
+    setGuestsListData([
+      ...guestsListData,
+      { id: guestsListData.length + 1, guestName: '', guestMobile: '', guestAadhaar: '' },
+    ]);
   };
 
   const removeGuest = (id) => {
-    setGuestsList(guestsList.filter((guest) => guest.id !== id));
+    setGuestsListData(guestsListData.filter((guest) => guest.id !== id));
   };
 
   const handleGuestChange = (id, key, value) => {
-    const updatedGuestsList = guestsList.map((guest) => {
+    const updatedGuestsList = guestsListData.map((guest) => {
       if (guest.id === id) {
         return { ...guest, [key]: value };
       }
@@ -54,7 +87,7 @@ const Appointment = ({ status }) => {
       return guest;
     });
 
-    setGuestsList(updatedGuestsList);
+    setGuestsListData(updatedGuestsList);
   };
 
   return (
@@ -69,7 +102,7 @@ const Appointment = ({ status }) => {
               <h1 className="text-main-black pb-6 text-center text-[30px] font-semibold tracking-tight">
                 Book an Appointment
               </h1>
-              {status && <div className="mb-[30px] text-green-600">{status}</div>}
+              {status && <div className="mb-[30px] text-center text-xl text-green-600">{status}</div>}
               <p className="text-paragraph mb-[30px]">
                 Required fields are marked <span className="text-red-600">*</span>
               </p>
@@ -89,7 +122,7 @@ const Appointment = ({ status }) => {
                           className="mt-1 block w-full"
                           autoComplete="username"
                           onChange={(e) => setData('name', e.target.value)}
-                          maxLength={50}
+                          maxLength={60}
                           required
                         />
 
@@ -159,7 +192,7 @@ const Appointment = ({ status }) => {
                           className="mt-1 block w-full"
                           autoComplete="off"
                           onChange={(e) => setData('mobileNumber', e.target.value)}
-                          maxLength={12}
+                          maxLength={10}
                           ref={mobileInputRef}
                           required
                         />
@@ -178,6 +211,7 @@ const Appointment = ({ status }) => {
                           className="mt-1 block w-full"
                           autoComplete="off"
                           onChange={(e) => setData('state', e.target.value)}
+                          maxLength={50}
                           required
                         />
 
@@ -195,6 +229,7 @@ const Appointment = ({ status }) => {
                           className="mt-1 block w-full"
                           autoComplete="off"
                           onChange={(e) => setData('district', e.target.value)}
+                          maxLength={50}
                           required
                         />
 
@@ -212,6 +247,7 @@ const Appointment = ({ status }) => {
                           className="mt-1 block w-full"
                           autoComplete="off"
                           onChange={(e) => setData('block', e.target.value)}
+                          maxLength={50}
                         />
 
                         <InputError message={errors.block} className="mt-2" />
@@ -225,10 +261,7 @@ const Appointment = ({ status }) => {
                           name="visitPurpose"
                           value={data.visitPurpose}
                           className="mt-1 block w-full rounded-md border-gray-300 p-2 leading-6 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                          onChange={(e) => {
-                            setData('visitPurpose', e.target.value);
-                            setData('visitTime', '');
-                          }}
+                          onChange={(e) => setData('visitPurpose', e.target.value)}
                           required
                         >
                           <option value="">Select</option>
@@ -329,7 +362,7 @@ const Appointment = ({ status }) => {
                         </button>
                       </div>
 
-                      {guestsList.map((guest) => (
+                      {guestsListData.map((guest) => (
                         <React.Fragment key={guest.id}>
                           <div className="sm:col-span-2 sm:col-start-1">
                             <InputLabel htmlFor={`guestName-${guest.id}`} value={`Name ${guest.id}`} required={true} />
@@ -341,7 +374,7 @@ const Appointment = ({ status }) => {
                               value={guest.name}
                               className="mt-1 block w-full"
                               autoComplete="off"
-                              onChange={(e) => handleGuestChange(guest.id, 'name', e.target.value)}
+                              onChange={(e) => handleGuestChange(guest.id, 'guestName', e.target.value)}
                               maxLength={50}
                               required
                             />
@@ -363,8 +396,8 @@ const Appointment = ({ status }) => {
                               value={guest.mobile}
                               className="mt-1 block w-full"
                               autoComplete="off"
-                              onChange={(e) => handleGuestChange(guest.id, 'mobile', e.target.value)}
-                              maxLength={12}
+                              onChange={(e) => handleGuestChange(guest.id, 'guestMobile', e.target.value)}
+                              maxLength={10}
                               ref={mobileInputRef}
                               required
                             />
@@ -386,7 +419,7 @@ const Appointment = ({ status }) => {
                               value={guest.aadhaar}
                               className="mt-1 block w-full"
                               autoComplete="off"
-                              onChange={(e) => handleGuestChange(guest.id, 'aadhaar', e.target.value)}
+                              onChange={(e) => handleGuestChange(guest.id, 'guestAadhaar', e.target.value)}
                               maxLength={14}
                               ref={aadhaarInputRef}
                               required

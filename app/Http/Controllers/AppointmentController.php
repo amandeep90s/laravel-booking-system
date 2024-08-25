@@ -14,7 +14,9 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Appointment');
+        return Inertia::render('Appointment', [
+            'status' => null,
+        ]);
     }
 
     /**
@@ -30,7 +32,26 @@ class AppointmentController extends Controller
      */
     public function store(StoreAppointmentRequest $request)
     {
-        //
+        Appointment::create([
+            'name' => $request->name,
+            'aadhaarNumber' => $request->aadhaarNumber,
+            'mobileNumber' => $request->mobileNumber,
+            'addressLine1' => $request->addressLine1,
+            'addressLine2' => $request->addressLine2,
+            'state' => $request->state,
+            'district' => $request->district,
+            'block' => $request->block,
+            'numberOfVisitors' => $request->numberOfVisitors,
+            'visitPurpose' => $request->visitPurpose,
+            'visitDescription' => $request->visitDescription,
+            'visitDate' => $request->visitDate,
+            'visitTime' => date('H:i:s', strtotime($request->visitTime)),
+            'guestsList' => json_encode($request->guestsList),
+        ]);
+
+        return Inertia::render('Appointment', [
+            'status' => 'Your appointment booked successfully!',
+        ]);
     }
 
     /**
