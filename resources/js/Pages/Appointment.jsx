@@ -8,26 +8,27 @@ import HomeLayout from '@/Layouts/HomeLayout.jsx';
 import timings from '@/utils/timings';
 import { Head, useForm } from '@inertiajs/react';
 import { useMask } from '@react-input/mask';
+import PropTypes from 'prop-types';
 import React from 'react';
 
-const Appointment = ({ status }) => {
+const Appointment = ({ status = '' }) => {
   const aadhaarInputRef = useMask({ mask: '____-____-____', replacement: { _: /\d/ } });
   const mobileInputRef = useMask({ mask: '__________', replacement: { _: /\d/ } });
 
   const { data, setData, post, processing, errors, reset } = useForm({
-    name: 'John Doe',
-    aadhaarNumber: '1234-5678-9012',
-    mobileNumber: '9876543210',
-    addressLine1: '123 Main St',
-    addressLine2: 'Apt 4B',
-    state: 'California',
-    district: 'Los Angeles',
-    block: 'Block A',
-    numberOfVisitors: '3',
-    visitPurpose: 'general',
-    visitDescription: 'Discussing project details',
-    visitDate: '2024-08-27',
-    visitTime: '08:00 AM',
+    name: '',
+    aadhaarNumber: '',
+    mobileNumber: '',
+    addressLine1: '',
+    addressLine2: '',
+    state: '',
+    district: '',
+    block: '',
+    numberOfVisitors: '',
+    visitPurpose: '',
+    visitDescription: '',
+    visitDate: '',
+    visitTime: '',
     guestsList: [],
   });
 
@@ -35,23 +36,23 @@ const Appointment = ({ status }) => {
     e.preventDefault();
 
     post(route('appointment-store'), {
-      onFinish: () => {
-        // reset(
-        //   'name',
-        //   'aadhaarNumber',
-        //   'mobileNumber',
-        //   'addressLine1',
-        //   'addressLine2',
-        //   'state',
-        //   'district',
-        //   'block',
-        //   'numberOfVisitors',
-        //   'visitPurpose',
-        //   'visitDescription',
-        //   'visitDate',
-        //   'visitTime',
-        //   'guestsList',
-        // );
+      onSuccess: () => {
+        reset(
+          'name',
+          'aadhaarNumber',
+          'mobileNumber',
+          'addressLine1',
+          'addressLine2',
+          'state',
+          'district',
+          'block',
+          'numberOfVisitors',
+          'visitPurpose',
+          'visitDescription',
+          'visitDate',
+          'visitTime',
+          'guestsList',
+        );
       },
     });
   };
@@ -454,6 +455,10 @@ const Appointment = ({ status }) => {
       </section>
     </HomeLayout>
   );
+};
+
+Appointment.propTypes = {
+  status: PropTypes.string,
 };
 
 export default Appointment;
