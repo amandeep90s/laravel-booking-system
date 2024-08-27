@@ -1,0 +1,4 @@
+{
+  "include": ["bin", "scripts", "src", "tests"],
+  "exclude": ["database"]
+}
