@@ -1274,9 +1274,6 @@ video {
 .contents {
   display: contents;
 }
-.hidden {
-  display: none;
-}
 .aspect-square {
   aspect-ratio: 1/1;
 }
