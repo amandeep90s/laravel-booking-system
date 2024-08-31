@@ -1,14 +1,12 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEventListener, useMountEffect, useUnmountEffect } from 'primereact/hooks';
-import React, { useContext, useEffect, useRef } from 'react';
-import { classNames } from 'primereact/utils';
 import AppFooter from '@/Layouts/layout/AppFooter.jsx';
 import AppSidebar from '@/Layouts/layout/AppSidebar.jsx';
 import AppTopbar from '@/Layouts/layout/AppTopbar.jsx';
-import AppConfig from '@/Layouts/layout/AppConfig.jsx';
-import { LayoutContext } from './context/layoutcontext';
 import { PrimeReactContext } from 'primereact/api';
-// import { usePathname, useSearchParams } from "next/navigation";
+import { useEventListener, useMountEffect, useUnmountEffect } from 'primereact/hooks';
+import { classNames } from 'primereact/utils';
+import PropTypes from 'prop-types';
+import React, { useContext, useEffect, useRef } from 'react';
+import { LayoutContext } from './context/layoutcontext';
 
 const Layout = ({ children }) => {
   const { layoutConfig, layoutState, setLayoutState } = useContext(LayoutContext);
@@ -33,7 +31,6 @@ const Layout = ({ children }) => {
   });
 
   const pathname = route().current();
-  // const searchParams = useSearchParams();
   useEffect(() => {
     hideMenu();
     hideProfileMenu();
@@ -127,21 +124,22 @@ const Layout = ({ children }) => {
   });
 
   return (
-    <React.Fragment>
-      <div className={containerClass}>
-        <AppTopbar ref={topbarRef} />
-        <div ref={sidebarRef} className="layout-sidebar">
-          <AppSidebar />
-        </div>
-        <div className="layout-main-container">
-          <div className="layout-main">{children}</div>
-          <AppFooter />
-        </div>
-        <AppConfig />
-        <div className="layout-mask"></div>
+    <div className={containerClass}>
+      <AppTopbar ref={topbarRef} />
+      <div ref={sidebarRef} className="layout-sidebar">
+        <AppSidebar />
       </div>
-    </React.Fragment>
+      <div className="layout-main-container">
+        <div className="layout-main">{children}</div>
+        <AppFooter />
+      </div>
+      <div className="layout-mask"></div>
+    </div>
   );
+};
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default Layout;
