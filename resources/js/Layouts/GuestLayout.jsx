@@ -1,7 +1,8 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link } from '@inertiajs/react';
+import PropTypes from 'prop-types';
 
-export default function Guest({ children }) {
+const Guest = ({ children }) => {
   return (
     <div className="flex min-h-screen flex-col items-center bg-gray-100 pt-6 sm:justify-center sm:pt-0">
       <div>
@@ -15,4 +16,10 @@ export default function Guest({ children }) {
       </div>
     </div>
   );
-}
+};
+
+Guest.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default Guest;

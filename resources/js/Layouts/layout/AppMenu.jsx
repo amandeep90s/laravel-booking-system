@@ -8,6 +8,21 @@ const AppMenu = () => {
       label: 'Home',
       items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: route('dashboard') }],
     },
+    {
+      label: 'Appointments',
+      items: [
+        { label: 'All Appoinments', icon: 'pi pi-calendar', to: route('reports.daily') },
+        { label: 'Restrict Appoinments', icon: 'pi pi-calendar-times', to: route('reports.daily') },
+      ],
+    },
+    {
+      label: 'Appointment Reports',
+      items: [
+        { label: 'Daily', icon: 'pi pi-file-excel', to: route('reports.daily') },
+        { label: 'Weekly', icon: 'pi pi-file-excel', to: route('reports.weekly') },
+        { label: 'Monthly', icon: 'pi pi-file-excel', to: route('reports.monthly') },
+      ],
+    },
   ];
 
   return (

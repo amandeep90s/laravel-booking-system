@@ -1,9 +1,10 @@
+import { Link } from '@inertiajs/react';
 import { Ripple } from 'primereact/ripple';
 import { classNames } from 'primereact/utils';
-import React, { useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
+import React, { useContext, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { MenuContext } from './context/menucontext';
-import { Link } from '@inertiajs/react';
 
 const AppMenuitem = (props) => {
   const pathname = route(route().current());
@@ -94,6 +95,13 @@ const AppMenuitem = (props) => {
       {subMenu}
     </li>
   );
+};
+
+AppMenuitem.propTypes = {
+  item: PropTypes.object.isRequired,
+  parentKey: PropTypes.string,
+  index: PropTypes.number,
+  root: PropTypes.bool,
 };
 
 export default AppMenuitem;
