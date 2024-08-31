@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { createContext, useMemo, useState } from 'react';
 
 export const LayoutContext = createContext({});
@@ -70,4 +71,8 @@ export const LayoutProvider = ({ children }) => {
   );
 
   return <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>;
+};
+
+LayoutProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
