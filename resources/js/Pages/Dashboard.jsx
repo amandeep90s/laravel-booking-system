@@ -1,7 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-export default function Dashboard({ auth }) {
+const Dashboard = ({ auth }) => {
   return (
     <AuthenticatedLayout
       user={auth.user}
@@ -9,13 +11,20 @@ export default function Dashboard({ auth }) {
     >
       <Head title="Dashboard" />
 
-      <div className="py-12">
-        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-            <div className="p-6 text-gray-900">You're logged in!</div>
+      <div className="grid">
+        <div className="col-12 xl:col-12">
+          <div className="card">
+            <h5>{auth.user.name} Logged In</h5>
+            {/* <Chart type="line" data={lineData} options={lineOptions} /> */}
           </div>
         </div>
       </div>
     </AuthenticatedLayout>
   );
-}
+};
+
+Dashboard.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+export default Dashboard;

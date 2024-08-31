@@ -1,8 +1,4 @@
 import '../css/app.css';
-import '../css/aos.css';
-import '../css/swiper-bundle.min.css';
-import '../css/output.css';
-import '../css/style.css';
 import './bootstrap';
 
 import { createInertiaApp } from '@inertiajs/react';

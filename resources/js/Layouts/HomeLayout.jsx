@@ -1,9 +1,15 @@
+import '../../css/aos.css';
+import '../../css/output.css';
+import '../../css/style.css';
+import '../../css/swiper-bundle.min.css';
+
 import Footer from '@/Components/Footer.jsx';
 import Menu from '@/Components/Menu';
 import MobileMenu from '@/Components/MobileMenu';
+import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
-export default function HomeLayout({ children }) {
+const HomeLayout = ({ children }) => {
   useEffect(() => {
     const scripts = [
       '/js/jquery-3.6.3.min.js',
@@ -64,4 +70,10 @@ export default function HomeLayout({ children }) {
       </div>
     </>
   );
-}
+};
+
+HomeLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default HomeLayout;

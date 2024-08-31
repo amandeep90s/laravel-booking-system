@@ -7,6 +7,7 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PressMediaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -26,6 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('reports/daily', [ReportsController::class, 'edit'])->name('reports.daily');
+    Route::get('reports/weekly', [ReportsController::class, 'edit'])->name('reports.weekly');
+    Route::get('reports/monthly', [ReportsController::class, 'edit'])->name('reports.monthly');
 });
 
 require __DIR__.'/auth.php';
