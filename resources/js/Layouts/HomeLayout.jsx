@@ -1,3 +1,8 @@
+import '../../css/aos.css';
+import '../../css/output.css';
+import '../../css/style.css';
+import '../../css/swiper-bundle.min.css';
+
 import Footer from '@/Components/Footer.jsx';
 import Menu from '@/Components/Menu';
 import MobileMenu from '@/Components/MobileMenu';

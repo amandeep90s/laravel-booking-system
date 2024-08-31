@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { createContext, useMemo, useState } from 'react';
 
 export const LayoutContext = createContext({});
 
@@ -57,14 +57,17 @@ export const LayoutProvider = ({ children }) => {
     return window.innerWidth > 991;
   };
 
-  const value = {
-    layoutConfig,
-    setLayoutConfig,
-    layoutState,
-    setLayoutState,
-    onMenuToggle,
-    showProfileSidebar,
-  };
+  const value = useMemo(
+    () => ({
+      layoutConfig,
+      setLayoutConfig,
+      layoutState,
+      setLayoutState,
+      onMenuToggle,
+      showProfileSidebar,
+    }),
+    [layoutConfig, setLayoutConfig, layoutState, setLayoutState, onMenuToggle, showProfileSidebar],
+  );
 
   return <LayoutContext.Provider value={value}>{children}</LayoutContext.Provider>;
 };
