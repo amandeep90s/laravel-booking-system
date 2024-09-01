@@ -8,160 +8,108 @@ use App\Exports\AppointmentWeeklyExport;
 use App\Models\Appointment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ReportsController extends Controller
 {
-    /**
-     * Show the form for creating a daily report of appointments.
-     */
-    public function daily()
+    const FILE_EXTENSION = '.xlsx';
+
+    private $selectColumns = [
+        'serialNumber',
+        'name',
+        'aadhaarNumber',
+        'mobileNumber',
+        'addressLine1',
+        'addressLine2',
+        'state',
+        'district',
+        'block',
+        'numberOfVisitors',
+        'visitPurpose',
+        'visitDescription',
+        'visitDate',
+        'visitTime',
+        'guestsList',
+    ];
+
+    public function daily(): Response
     {
-        //
+        return $this->showReportForm('reports/appointments/Daily');
     }
 
-    /**
-     * Create the daily report of appointments.
-     */
     public function dailyReport(Request $request)
     {
-        $currentDate = Carbon::now();
-        $requestDate = Carbon::parse($request->date);
-
-        if ($requestDate->greaterThan($currentDate)) {
-            return back()->with('error', 'You cannot select any future date.');
-        }
-
-        $data = Appointment::select(
-            'serialNumber',
-            'name',
-            'aadhaarNumber',
-            'mobileNumber',
-            'addressLine1',
-            'addressLine2',
-            'state',
-            'district',
-            'block',
-            'numberOfVisitors',
-            'visitPurpose',
-            'visitDescription',
-            'visitDate',
-            'visitTime',
-            'guestsList',
-        )
-            ->whereDate('created_at', $requestDate)
-            ->get();
-
-        if ($data->isEmpty()) {
-            return back()->with('error', 'No records found.');
-        }
-
-        $fileName = 'daily-report-'.$requestDate->format('d-m-Y').'.xlsx';
-
-        return Excel::download(new AppointmentDailyExport($data), $fileName);
+        return $this->generateReport($request, 'daily');
     }
 
-    /**
-     * Show the form for creating a weekly report of appointments.
-     */
-    public function weekly()
+    public function weekly(): Response
     {
-        //
+        return $this->showReportForm('reports/appointments/Weekly');
     }
 
-    /**
-     * Create the weekly report of appointments.
-     */
     public function weeklyReport(Request $request)
     {
-        $currentDate = Carbon::now();
-        $requestDate = Carbon::parse($request->date);
-
-        if ($requestDate->greaterThan($currentDate)) {
-            return back()->with('error', 'You cannot select any future date.');
-        }
-
-        $weekStart = $requestDate->startOfWeek();
-        $weekEnd = $requestDate->endOfWeek();
-
-        $data = Appointment::select(
-            'serialNumber',
-            'name',
-            'aadhaarNumber',
-            'mobileNumber',
-            'addressLine1',
-            'addressLine2',
-            'state',
-            'district',
-            'block',
-            'numberOfVisitors',
-            'visitPurpose',
-            'visitDescription',
-            'visitDate',
-            'visitTime',
-            'guestsList',
-        )
-            ->whereBetween('created_at', [$weekStart, $weekEnd])
-            ->get();
-
-        if ($data->isEmpty()) {
-            return back()->with('error', 'No records found for the selected week.');
-        }
-
-        $fileName = 'weekly-report-'.$weekStart->format('d-m-Y').'-to-'.$weekEnd->format('d-m-Y').'.xlsx';
-
-        return Excel::download(new AppointmentWeeklyExport($data), $fileName);
+        return $this->generateReport($request, 'weekly');
     }
 
-    /**
-     * Show the form for creating a monthly report of appointments.
-     */
-    public function monthly()
+    public function monthly(): Response
     {
-        //
+        return $this->showReportForm('reports/appointments/Monthly');
     }
 
-    /**
-     * Create the monthly report of appointments.
-     */
     public function monthlyReport(Request $request)
     {
-        $currentDate = Carbon::now();
+        return $this->generateReport($request, 'monthly');
+    }
+
+    /**
+     * Show the form for creating a report of appointments.
+     */
+    private function showReportForm(string $view): Response
+    {
+        return Inertia::render($view, [
+            'status' => session('status'),
+        ]);
+    }
+
+    /**
+     * Generate the report of appointments.
+     */
+    private function generateReport(Request $request, string $type)
+    {
         $requestDate = Carbon::parse($request->date);
 
-        if ($requestDate->greaterThan($currentDate)) {
-            return back()->with('error', 'You cannot select any future date.');
+        switch ($type) {
+            case 'daily':
+                $dateRange = [$requestDate->startOfDay(), $requestDate->endOfDay()];
+
+                $fileName = 'daily-report-'.$requestDate->format('d-m-Y').self::FILE_EXTENSION;
+                $exportClass = AppointmentDailyExport::class;
+                break;
+            case 'weekly':
+                $dateRange = [$requestDate->startOfWeek(), $requestDate->endOfWeek()];
+                $fileName = 'weekly-report-'.$dateRange[0]->format('d-m-Y').'-to-'.$dateRange[1]->format('d-m-Y').self::FILE_EXTENSION;
+                $exportClass = AppointmentWeeklyExport::class;
+                break;
+            case 'monthly':
+                $dateRange = [$requestDate->startOfMonth(), $requestDate->endOfMonth()];
+                $fileName = 'monthly-report-'.$dateRange[0]->format('m-Y').self::FILE_EXTENSION;
+                $exportClass = AppointmentMonthlyExport::class;
+                break;
+            default:
+                return back()->with('error', 'Invalid report type.');
         }
 
-        $monthStart = $requestDate->startOfMonth();
-        $monthEnd = $requestDate->endOfMonth();
-
-        $data = Appointment::select(
-            'serialNumber',
-            'name',
-            'aadhaarNumber',
-            'mobileNumber',
-            'addressLine1',
-            'addressLine2',
-            'state',
-            'district',
-            'block',
-            'numberOfVisitors',
-            'visitPurpose',
-            'visitDescription',
-            'visitDate',
-            'visitTime',
-            'guestsList',
-        )
-            ->whereBetween('created_at', [$monthStart, $monthEnd])
+        $data = Appointment::select($this->selectColumns)
+            ->whereBetween('created_at', $dateRange)
             ->get();
 
         if ($data->isEmpty()) {
-            return back()->with('error', 'No records found for the selected month.');
+            return back()->with('error', "No records found for the selected {$type} period.");
         }
 
-        $fileName = 'monthly-report-'.$monthStart->format('m-Y').'.xlsx';
-
-        return Excel::download(new AppointmentMonthlyExport($data), $fileName);
+        return Excel::download(new $exportClass($data), $fileName);
     }
 }

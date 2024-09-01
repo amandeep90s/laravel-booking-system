@@ -11,8 +11,8 @@ const AppMenu = () => {
     {
       label: 'Appointments',
       items: [
-        { label: 'All Appoinments', icon: 'pi pi-calendar', to: route('reports.daily') },
-        { label: 'Restrict Appoinments', icon: 'pi pi-calendar-times', to: route('reports.daily') },
+        { label: 'All Appoinments', icon: 'pi pi-calendar', to: '' },
+        { label: 'Restrict Appoinments', icon: 'pi pi-calendar-times', to: '' },
       ],
     },
     {
