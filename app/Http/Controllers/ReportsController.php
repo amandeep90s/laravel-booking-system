@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\AppointmentDailyExport;
-use App\Exports\AppointmentMonthlyExport;
-use App\Exports\AppointmentWeeklyExport;
 use App\Models\Appointment;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
-use Maatwebsite\Excel\Facades\Excel;
 
 class ReportsController extends Controller
 {
@@ -80,36 +76,39 @@ class ReportsController extends Controller
     private function generateReport(Request $request, string $type)
     {
         $requestDate = Carbon::parse($request->date);
+        $visitPurpose = $request->visitPurpose;
 
         switch ($type) {
             case 'daily':
-                $dateRange = [$requestDate->startOfDay(), $requestDate->endOfDay()];
-
-                $fileName = 'daily-report-'.$requestDate->format('d-m-Y').self::FILE_EXTENSION;
-                $exportClass = AppointmentDailyExport::class;
+                $query = Appointment::select($this->selectColumns)
+                    ->whereDate('visitDate', $requestDate->format('Y-m-d'));
                 break;
             case 'weekly':
-                $dateRange = [$requestDate->startOfWeek(), $requestDate->endOfWeek()];
-                $fileName = 'weekly-report-'.$dateRange[0]->format('d-m-Y').'-to-'.$dateRange[1]->format('d-m-Y').self::FILE_EXTENSION;
-                $exportClass = AppointmentWeeklyExport::class;
+                $startDate = $requestDate->startOfWeek()->format('Y-m-d');
+                $endDate = $requestDate->endOfWeek()->format('Y-m-d');
+                $query = Appointment::select($this->selectColumns)
+                    ->whereBetween('visitDate', [$startDate, $endDate]);
                 break;
             case 'monthly':
-                $dateRange = [$requestDate->startOfMonth(), $requestDate->endOfMonth()];
-                $fileName = 'monthly-report-'.$dateRange[0]->format('m-Y').self::FILE_EXTENSION;
-                $exportClass = AppointmentMonthlyExport::class;
+                $startDate = $requestDate->startOfMonth()->format('Y-m-d');
+                $endDate = $requestDate->endOfMonth()->format('Y-m-d');
+                $query = Appointment::select($this->selectColumns)
+                    ->whereBetween('visitDate', [$startDate, $endDate]);
                 break;
             default:
-                return back()->with('error', 'Invalid report type.');
+                return response()->json(['error' => 'Invalid report type.']);
         }
 
-        $data = Appointment::select($this->selectColumns)
-            ->whereBetween('created_at', $dateRange)
-            ->get();
+        if (! empty($visitPurpose)) {
+            $query->where('visitPurpose', $visitPurpose);
+        }
+
+        $data = $query->get();
 
         if ($data->isEmpty()) {
-            return back()->with('error', "No records found for the selected {$type} period.");
+            return response()->json(['message' => "No records found for the selected {$type} period."]);
         }
 
-        return Excel::download(new $exportClass($data), $fileName);
+        return response()->json($data);
     }
 }
