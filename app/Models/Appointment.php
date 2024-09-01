@@ -11,6 +11,7 @@ class Appointment extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'serialNumber',
         'name',
         'aadhaarNumber',
         'mobileNumber',

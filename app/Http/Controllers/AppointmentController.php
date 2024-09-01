@@ -43,7 +43,8 @@ class AppointmentController extends Controller
         }
 
         // Create a new appointment
-        Appointment::create([
+        $appointment = Appointment::create([
+            'serialNumber' => $this->generateSerialNumber(),
             'name' => $request->name,
             'aadhaarNumber' => $request->aadhaarNumber,
             'mobileNumber' => $request->mobileNumber,
@@ -60,7 +61,7 @@ class AppointmentController extends Controller
             'guestsList' => json_encode($request->guestsList),
         ]);
 
-        session()->flash('status', 'Your appointment booked successfully!');
+        session()->flash('status', 'Your appointment booked successfully and your serial number is '.$appointment->serialNumber.'. Please note it down or take screenshot for future reference.');
 
         return to_route('appointment');
     }
@@ -95,5 +96,17 @@ class AppointmentController extends Controller
     public function destroy(Appointment $appointment)
     {
         //
+    }
+
+    /**
+     * Generate Serial Number for every appointment
+     */
+    protected function generateSerialNumber(): string
+    {
+        $lastAppointment = Appointment::orderBy('id', 'desc')->first();
+
+        $newNumber = $lastAppointment ? $lastAppointment->id + 1 : 1;
+
+        return 'APP'.str_pad($newNumber, 4, '0', STR_PAD_LEFT);
     }
 }
