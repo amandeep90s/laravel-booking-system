@@ -6,7 +6,6 @@ import { appConstants } from '@/constants/application';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import axios from 'axios';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import Table from './Table';
