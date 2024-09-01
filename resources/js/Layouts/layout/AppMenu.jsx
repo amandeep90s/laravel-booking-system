@@ -8,13 +8,12 @@ const AppMenu = () => {
       label: 'Home',
       items: [{ label: 'Dashboard', icon: 'pi pi-fw pi-home', to: route('dashboard') }],
     },
-    {
-      label: 'Appointments',
-      items: [
-        { label: 'All Appoinments', icon: 'pi pi-calendar', to: '' },
-        { label: 'Restrict Appoinments', icon: 'pi pi-calendar-times', to: '' },
-      ],
-    },
+    // {
+    //   label: 'Appointments',
+    //   items: [
+    //     { label: 'Restrict Appoinments', icon: 'pi pi-calendar-times', to: '' },
+    //   ],
+    // },
     {
       label: 'Appointment Reports',
       items: [
