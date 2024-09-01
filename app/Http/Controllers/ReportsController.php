@@ -2,62 +2,52 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class ReportsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show the for creating a daily reports of appointment.
      */
-    public function index()
+    public function daily()
     {
         //
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Create the daily reports of appointment.
      */
-    public function create()
+    public function dailyReport()
     {
         //
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Show the for creating a weekly reports of appointment.
      */
-    public function store(Request $request)
+    public function weekly()
     {
         //
     }
 
     /**
-     * Display the specified resource.
+     * Create the weekly reports of appointment.
      */
-    public function show(string $id)
+    public function weeklyReport()
     {
         //
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the for creating a monthly reports of appointment.
      */
-    public function edit(string $id)
+    public function monthly()
     {
         //
     }
 
     /**
-     * Update the specified resource in storage.
+     * Create the montly reports of appointment.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function monthlyReport()
     {
         //
     }
