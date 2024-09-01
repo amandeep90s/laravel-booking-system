@@ -33,9 +33,18 @@
         <td>{{ $item->numberOfVisitors }}</td>
         <td>{{ $item->visitPurpose }}</td>
         <td>{{ $item->visitDescription }}</td>
-        <td>{{ $item->visitDate }}</td>
-        <td>{{ $item->visitTime }}</td>
-        <td>{{ $item->guestsList }}</td>
+        <td>{{ \Carbon\Carbon::parse($item->visitDate)->format('d/m/Y') }}</td>
+        <td>{{ \Carbon\Carbon::parse($item->visitTime)->format('h:i A') }}</td>
+        @php
+          $guests = json_decode($item->guestsList, true);
+          $guestDetails = collect($guests)
+            ->map(function ($guest) {
+              return implode(', ', $guest);
+            })
+            ->implode('; ');
+        @endphp
+
+        <td>{{ $guestDetails }}</td>
       </tr>
     @endforeach
   </tbody>
